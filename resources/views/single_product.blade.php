@@ -76,7 +76,11 @@
               <h6>BDT: {{$products->price}}</h6>
               <p>{{$products->Details}} </p>
               <span>{{$products->quantity}} left on stock</span>
-
+                @if(session()->has('error'))
+                  <div class="text-danger">
+                      {{session()->get('error')}}
+                  </div>
+                  @endif
               <form action="/add-to-cart" method="post">
                 @csrf
                 <label for="quantity">Quantity:</label>

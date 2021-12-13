@@ -149,20 +149,26 @@ class ProductController extends Controller
             $price= $request->has('price')? $request->get('price'): '';
 
             $images= Product::find($id)->image;
-            
             $image= explode('|', $images)[0];
+
             $cart= Cart::content()->where('id', $id)->first();
+            $quntity = Product::find($id)->quantity;
+            if($quantity > $quntity){
+                return back()->with('error', 'Quantity Must be Less then '.$quntity);
+            }else{
 
-            if(isset($cart)&& $cart!=null){
-                $quantity= ((int)$quantity + (int)$cart->qty);
-                $total= ((int)$quantity * (int)$price);
-                Cart::update($cart->rowId, ['qty'=>$quantity, 'options'=> ['image'=>$image, 'total'=> $total]]);
-            } else{
-                $total= ((int)$quantity * (int)$price);
-                Cart::add($id, $name, $quantity, $price, ['image'=>$image, 'total'=> $total]);
+                if(isset($cart)&& $cart!=null){
+                    $quantity= ((int)$quantity + (int)$cart->qty);
+                    $total= ((int)$quantity * (int)$price);
+                    Cart::update($cart->rowId, ['qty'=>$quantity, 'options'=> ['image'=>$image, 'total'=> $total]]);
+                } else{
+                    $total= ((int)$quantity * (int)$price);
+                    Cart::add($id, $name, $quantity, $price, ['image'=>$image, 'total'=> $total]);
+                }
+
+                return back()->with('success', 'Product Added to Your Cart!');
             }
-
-            return back()->with('success', 'Product Added to Your Cart!');
+            
         }
 
 

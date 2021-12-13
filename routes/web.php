@@ -25,9 +25,7 @@ Route::get('/products','ProductController@showWeb')->name('showWeb');
 
 Route::get('/single_product/{id}','ProductController@showSingle')->name('showSingle');
 
-// Route::get('/cart', function () {
-//     return view('/cart');
-// });
+
 //  Adding Cart Functionality...........
 Route::post('/add-to-cart','ProductController@addToCart')->name('addToCart');
 Route::get('/cart','ProductController@viewCart')->name('viewCart');
@@ -52,8 +50,6 @@ Route::prefix('admin')->middleware('auth')->name('admin')->group(function(){
         return view('admin.index');
     })->name('index');
 
-
-
     //Category Controller
   
     Route::get('categories','CategoryController@index')->name('categories');
@@ -75,9 +71,6 @@ Route::prefix('admin')->middleware('auth')->name('admin')->group(function(){
 
 
 });
-
-
-
 
 
 // Subscriber Controller

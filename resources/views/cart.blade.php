@@ -31,7 +31,7 @@
                   </td>
                   <td>{{$cart->name}}</td>
                   <td>{{$cart->qty}}</td>
-                  <td>BDT: {{$cart->options['total']}}</td>
+                  <td>BDT: {{$cart->price}} </td>
                 </tr>
               @endforeach
               </tbody>
