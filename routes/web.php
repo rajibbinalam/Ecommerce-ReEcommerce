@@ -31,6 +31,8 @@ Route::post('/add-to-cart','ProductController@addToCart')->name('addToCart');
 Route::get('/cart','ProductController@viewCart')->name('viewCart');
 Route::get('/remove/{rowId}','ProductController@removeItem')->name('removeItem');
 
+Route::post('/update-cart-item','ProductController@updateCartItem');
+
 
 // Route::get('/products', function () {
 //     return view('products');

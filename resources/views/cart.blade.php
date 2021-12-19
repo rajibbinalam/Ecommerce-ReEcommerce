@@ -7,11 +7,16 @@
           <div class="col-md-12">
             <div class="section-heading">
               <div class="line-dec"></div>
-              <h1>Shoping Cart <span class="badge badge-primary badge-pill">{{$count}}</span></h1>
+              <h1>Shoping Cart <span class="badge badge-secondary badge-pill">Items: {{$count}}</span></h1>
               
             </div>
           </div>
           <div class="col-md-12">
+            @if(session()->has('success'))
+              <div class="alert alert-success">
+                  {{session()->get('success')}}
+              </div>
+              @endif
             <table class="table table-striped">
               <thead class="card-header">
                 <tr>
@@ -23,6 +28,11 @@
                 </tr>
               </thead>
               <tbody>
+                 @if(session()->has('error'))
+                  <div class="text-danger">
+                      {{session()->get('error')}}
+                  </div>
+                  @endif
               @foreach($carts as $cart)
                 <tr>
                   <th scope="row"><a href="{{url('/remove/'.$cart->rowId)}}"><i class="fa fa-times"></i></a></th>
@@ -30,8 +40,17 @@
                    <img src="" alt="">
                   </td>
                   <td>{{$cart->name}}</td>
-                  <td>{{$cart->qty}}</td>
                   <td>BDT: {{$cart->price}} </td>
+                  <td>
+                    <form action="/update-cart-item" method="post" class="float-right">
+                      @csrf
+                      <input type="number" style="border: none;" class="quantity-text" name="quantity" value="{{$cart->qty}}">
+                      <input name="pid" type="hidden" value="{{$cart->id}}">
+                      <input name="name" type="hidden" value="{{$cart->name}}">
+                      <input name="price" type="hidden" value="{{$cart->price}}">
+                      <input type="submit" class="btn btn-light" name="submit" value="Update">
+                    </form>
+                  </td>
                 </tr>
               @endforeach
               </tbody>
@@ -42,7 +61,7 @@
               <div class="col-md-6">
                 <div class="card">
                   <div class="card-header">
-                    Check Out <span class="disabled" disabled="disabled">( Total Item - {{$count}} )</span>
+                    Check Out <small class="disabled" class="form-control text-muted">( Total Items - {{$count}} )</small>
                   </div>
                   <div class="card-body">
                     <h6 class="card-title">Total Amount <span style="margin-left: 241px;"> BDT: {{$subTotal}}</span></h6><hr>
