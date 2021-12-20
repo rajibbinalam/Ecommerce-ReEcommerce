@@ -51,8 +51,8 @@
           <div class="col-md-12">
             <div class="logo">
             <a class="navbar-brand" href="{{url('/')}}" style="color: revert;">
-              <i class="fa fa-reorder" style="font-size: 17px; margin: 58px 0 46px 0;"></i>commerce
-                <!-- <img src="assets/images/header-logo.png" alt=""> -->
+              <!-- <i class="fa fa-reorder" style="font-size: 17px; margin: 58px 0 46px 0;"></i>commerce -->
+                <img src="{{asset('logo.png')}}" alt="Ecommerce" style="height: 31px;  width: 68px;">
             </a>
             </div>
           </div>
