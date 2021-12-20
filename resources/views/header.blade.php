@@ -26,7 +26,7 @@
               <a class="nav-link" href="{{url('/contact')}}">Contact Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('/cart')}}"><i class="fa fa-shopping-cart"></i> Cart<span class="badge badge-primary badge-pill" style="padding: 2px 3px 2px 3px; background-color: #ff5e00; position: absolute;">*</span></a>
+              <a class="nav-link" href="{{url('/cart')}}"><i class="fa fa-shopping-cart"></i> Cart<span class="badge badge-primary badge-pill" style="padding: 2px 3px 2px 3px; background-color: #ff5e00; position: absolute;">{{Cart::count()}}</span></a>
             </li>
           </ul>
         </div>
